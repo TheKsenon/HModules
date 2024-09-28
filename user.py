@@ -1,3 +1,5 @@
+# Module created by Ksenon, no editing and grabbing module...
+
 from .. import loader, utils
 from telethon.tl.types import Message
 from telethon.tl.functions.users import GetFullUserRequest
@@ -7,11 +9,16 @@ import asyncio
 
 @loader.tds
 class UserInfoMod(loader.Module):
+    """
+    🔧 Информация об пользователе. Создатель: @twink_ksenona_1 | Ksenon
+    """
+
     strings = {
         "name": "UserInfo",
         "userinfo_cmd_desc": "Показывает основную информацию о пользователе",
         "advancedinfo_cmd_desc": "Показывает расширенную информацию о пользователе, включая данные от @funstat_obot"
     }
+
     async def client_ready(self, client, db):
         self.client = client
         self.db = db
@@ -27,7 +34,7 @@ class UserInfoMod(loader.Module):
             elif reply:
                 user = await self.client.get_entity(reply.sender_id)
             else:
-                await message.edit("Пожалуйста, укажите пользователя или ответьте на его сообщение.")
+                await message.edit("⚒️ Введите юсернайм пользователя, или ответом на сообщение.")
                 return
             full_user = await self.client(GetFullUserRequest(user.id))
             main_text = self.get_main_text(user, full_user)
@@ -41,7 +48,7 @@ class UserInfoMod(loader.Module):
                 disable_security=True,
             )
         except Exception as e:
-            await message.edit(f"Произошла ошибка: {str(e)}")
+            await message.edit(f"🚫 Произошла ошибка: {str(e)}")
 
     @loader.owner
     async def advancedinfocmd(self, message):
@@ -54,12 +61,12 @@ class UserInfoMod(loader.Module):
             elif reply:
                 user = await self.client.get_entity(reply.sender_id)
             else:
-                await message.edit("Пожалуйста, укажите пользователя, ID или ответьте на сообщение.")
+                await message.edit("⚒️ Введите ID | юсернайм пользователя, или ответом на сообщение.")
                 return
             full_user = await self.client(GetFullUserRequest(user.id))
             funstat_data = await self.get_funstat_data(user.username or user.id)
             if not funstat_data:
-                await message.edit("Не удалось получить информацию от @funstat_obot.")
+                await message.edit("🚫 Не получилось узнать информацию.")
                 return
             advanced_text = self.get_advanced_text(user, full_user, funstat_data)
             await self.inline.form(
@@ -72,7 +79,7 @@ class UserInfoMod(loader.Module):
                 disable_security=True,
             )
         except Exception as e:
-            await message.edit(f"Произошла ошибка: {str(e)}")
+            await message.edit(f"🚫 Произошла ошибка: {str(e)}")
 
     def get_main_text(self, user, full_user):
         return (
@@ -121,7 +128,6 @@ class UserInfoMod(loader.Module):
             async for message in self.client.iter_messages(funstat_bot, limit=1):
                 if "Это" in message.text:
                     funstat_response = message.text
-                    # Удаляем всю историю чата с ботом
                     await self.client(DeleteHistoryRequest(peer=funstat_bot, max_id=0, just_clear=True, revoke=True))
                     return self.parse_funstat_data(funstat_response)
             await asyncio.sleep(1)
