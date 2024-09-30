@@ -1,4 +1,4 @@
-# Module created by Ksenon, no editing and grabbing module...
+# Module created by Ksenon, no editing and grabbing module... "IN GOD WE TRUST"
 
 from .. import loader, utils
 from telethon.tl.types import Message
@@ -10,13 +10,12 @@ import asyncio
 @loader.tds
 class UserInfoMod(loader.Module):
     """
-    🔧 Информация об пользователе. Создатель: @twink_ksenona_1 | Ksenon
-    """
+    🔧 Информация об пользователе. Создатель: @twink_ksenona_1 | Ksenon - Красть функционал, менять разработчика строго запрещено!   """
 
     strings = {
         "name": "UserInfo",
         "userinfo_cmd_desc": "Показывает основную информацию о пользователе",
-        "advancedinfo_cmd_desc": "Показывает расширенную информацию о пользователе, включая данные от @funstat_obot"
+        "advancedinfo_cmd_desc": "Показывает расширенную информацию о пользователе, включая данные."
     }
 
     async def client_ready(self, client, db):
@@ -110,7 +109,7 @@ class UserInfoMod(loader.Module):
             f"[+] Геолокация: <b>{'Да' if user.bot_inline_geo else 'Нет'}</b>\n"
             f"[+] Поддержка телеги: <b>{'Да' if user.support else 'Нет'}</b>\n"
             f"[+] Скам-аккаунт: <b>{'Да' if user.scam else 'Нет'}</b>\n"
-            f"[+] apply_min_photo: <b>{'Да' if user.apply_min_photo else 'Нет'}</b>\n"
+            f"[+] Аватарка: <b>{'Да' if user.apply_min_photo else 'Нет'}</b>\n"
             f"[+] Фэйк аккаунт: <b>{'Да' if user.fake else 'Нет'}</b>\n"
             f"[+] Меню в боте: <b>{'Да' if user.bot_attach_menu else 'Нет'}</b>\n"
             f"[+] Премиум: <b>{'Да' if user.premium else 'Нет'}</b>\n"
